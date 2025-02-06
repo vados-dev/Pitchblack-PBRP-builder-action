@@ -61,9 +61,17 @@ echo "Initializing PBRP repo..."
 if [ -n "$MANIFEST_BRANCH" ]; then
     echo "Initializing repo with branch: $MANIFEST_BRANCH"
     repo init --depth=1 -u "$MANIFEST_URL" -b "$MANIFEST_BRANCH"
+    sed -i 's/android_system_core/android_system_core_old/' .repo/manifests/omni-aosp.xml ;
+    sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/omni-aosp.xml ;
+    sed -i 's/android_frameworks_base/android_frameworks_base_old/g' .repo/manifests/remove-minimal.xml ;
+    sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/twrp-extras.xml ;
 else
     echo "Initializing repo without specifying a branch (default branch will be used)"
     repo init --depth=1 -u "$MANIFEST_URL"
+    sed -i 's/android_system_core/android_system_core_old/' .repo/manifests/omni-aosp.xml ;
+    sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/omni-aosp.xml ;
+    sed -i 's/android_frameworks_base/android_frameworks_base_old/g' .repo/manifests/remove-minimal.xml ;
+    sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/twrp-extras.xml ;
 fi
 
 # Sync the repo
