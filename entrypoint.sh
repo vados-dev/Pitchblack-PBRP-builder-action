@@ -39,7 +39,7 @@ git config --global user.email "$GITHUB_ACTOR_ID+$GITHUB_ACTOR@users.noreply.git
 # Determine MANIFEST_URL based on MANIFEST_BRANCH and python version
 ANDROID_VERSION=$(echo "$MANIFEST_BRANCH" | cut -d'-' -f2)
         if (( $(echo "$ANDROID_VERSION < 10.0" | bc -l) )); then
-          MANIFEST_URL=https://github.com/mlm-games/manifest_pb.git
+          MANIFEST_URL=https://github.com/vados-dev/manifest_pb.git
           echo "Installing Python 2 for legacy branches..."
           sudo apt-get install -y python2
           # Use update-alternatives to set python to point to python2
@@ -61,17 +61,21 @@ echo "Initializing PBRP repo..."
 if [ -n "$MANIFEST_BRANCH" ]; then
     echo "Initializing repo with branch: $MANIFEST_BRANCH"
     repo init --depth=1 -u "$MANIFEST_URL" -b "$MANIFEST_BRANCH"
+  if (( $(echo "$ANDROID_VERSION < 10.0" | bc -l) )); then
     sed -i 's/android_system_core/android_system_core_old/' .repo/manifests/omni-aosp.xml ;
     sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/omni-aosp.xml ;
     sed -i 's/android_frameworks_base/android_frameworks_base_old/g' .repo/manifests/remove-minimal.xml ;
     sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/twrp-extras.xml ;
+  fi  
 else
     echo "Initializing repo without specifying a branch (default branch will be used)"
     repo init --depth=1 -u "$MANIFEST_URL"
+  if (( $(echo "$ANDROID_VERSION < 10.0" | bc -l) )); then
     sed -i 's/android_system_core/android_system_core_old/' .repo/manifests/omni-aosp.xml ;
     sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/omni-aosp.xml ;
     sed -i 's/android_frameworks_base/android_frameworks_base_old/g' .repo/manifests/remove-minimal.xml ;
     sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/twrp-extras.xml ;
+  fi  
 fi
 
 # Sync the repo
