@@ -36,7 +36,6 @@ inputs:
       - boot
       - recovery
       - vendorboot
-      - twrp
 
 runs:
   using: 'composite'
