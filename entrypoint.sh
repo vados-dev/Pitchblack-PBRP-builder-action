@@ -47,7 +47,7 @@ ANDROID_VERSION=$(echo "$MANIFEST_BRANCH" | cut -d'-' -f2)
           sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 2
           sudo update-alternatives --set python /usr/bin/python2
         else
-          MANIFEST_URL=https://github.com/PitchBlackRecoveryProject/manifest_pb.git
+          MANIFEST_URL=https://github.com/vados-dev/manifest_pb.git
           echo "No need to install Python 2 for this branch."
           # Ensure python points to python3
           sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
