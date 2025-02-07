@@ -39,7 +39,7 @@ git config --global user.email "$GITHUB_ACTOR_ID+$GITHUB_ACTOR@users.noreply.git
 # Determine MANIFEST_URL based on MANIFEST_BRANCH and python version
 ANDROID_VERSION=$(echo "$MANIFEST_BRANCH" | cut -d'-' -f2)
         if (( $(echo "$ANDROID_VERSION < 10.0" | bc -l) )); then
-          MANIFEST_URL=https://github.com/vados-dev/manifest_pb.git
+          MANIFEST_URL=https://github.com/PitchBlackRecoveryProject/manifest_pb.git
           echo "Installing Python 2 for legacy branches..."
           sudo apt-get install -y python2
           # Use update-alternatives to set python to point to python2
@@ -47,7 +47,7 @@ ANDROID_VERSION=$(echo "$MANIFEST_BRANCH" | cut -d'-' -f2)
           sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 2
           sudo update-alternatives --set python /usr/bin/python2
         else
-          MANIFEST_URL=https://github.com/vados-dev/manifest_pb.git
+          MANIFEST_URL=https://github.com/PitchBlackRecoveryProject/manifest_pb.git
           echo "No need to install Python 2 for this branch."
           # Ensure python points to python3
           sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
