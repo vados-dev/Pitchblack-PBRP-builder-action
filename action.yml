@@ -9,23 +9,23 @@ inputs:
     type: string
   DEVICE_TREE:
     description: 'Device Tree URL (your device tree repository)'
-    default: 'https://github.com/vados-dev/sl8541e_cus_go'
+    default: ''
     type: string
   DEVICE_TREE_BRANCH:
     description: 'Device Tree Branch (leave blank to use the default branch of the repository)'
-    default: 'android-9.0'
+    default: ''
     type: string
   DEVICE_NAME:
     description: 'Specify your Device Codename (leave blank to auto-detect)'
-    default: 'sl8541e_cus_go'
+    default: ''
     type: string
   DEVICE_PATH:
     description: 'Specify your Device Path (leave blank to auto-detect)'
-    default: 'device/sprd/sl8541e_cus_go'
+    default: ''
     type: string
   MAKEFILE_NAME:
     description: 'Specify your Makefile Name (leave blank to auto-detect)'
-    default: 'omni_sl8541e_cus_go'
+    default: ''
     type: string
   BUILD_TARGET:
     description: 'Specify your Build Target'
