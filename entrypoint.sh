@@ -185,6 +185,7 @@ echo "BUILD_DATE=$(TZ=UTC date +%Y%m%d)" >> $GITHUB_ENV
 
 # Check if the recovery image exists
 echo "Checking if the recovery image exists..."
+#rdisk_file=$(find "$OUTPUT_DIR" -name "ramdisk-recovery.*" -print -quit)
 img_file=$(find "$OUTPUT_DIR" -name "*.img" -print -quit)
 zip_file=$(find "$OUTPUT_DIR" -name "*PBRP*zip" -print -quit)
 
