@@ -61,31 +61,29 @@ echo "Initializing PBRP repo..."
 if [ -n "$MANIFEST_BRANCH" ]; then
     echo "Initializing repo with branch: $MANIFEST_BRANCH"
     repo init --depth=1 -u "$MANIFEST_URL" -b "$MANIFEST_BRANCH"
-  if (( $(echo "$ANDROID_VERSION < 10.0" | bc -l) )); then
-    sed -i 's/android_system_core/android_system_core_old/' .repo/manifests/omni-aosp.xml ;
-    sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/omni-aosp.xml ;
-    sed -i 's/android_frameworks_base/android_frameworks_base_old/g' .repo/manifests/remove-minimal.xml ;
-    sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/twrp-extras.xml ;
-  fi  
+#  if (( $(echo "$ANDROID_VERSION < 10.0" | bc -l) )); then
+#    sed -i 's/android_system_core/android_system_core_old/' .repo/manifests/omni-aosp.xml ;
+#    sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/omni-aosp.xml ;
+#    sed -i 's/android_frameworks_base/android_frameworks_base_old/g' .repo/manifests/remove-minimal.xml ;
+#    sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/twrp-extras.xml ;
+#  fi  
 else
     echo "Initializing repo without specifying a branch (default branch will be used)"
     repo init --depth=1 -u "$MANIFEST_URL"
-  if (( $(echo "$ANDROID_VERSION < 10.0" | bc -l) )); then
-    sed -i 's/android_system_core/android_system_core_old/' .repo/manifests/omni-aosp.xml ;
-    sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/omni-aosp.xml ;
-    sed -i 's/android_frameworks_base/android_frameworks_base_old/g' .repo/manifests/remove-minimal.xml ;
-    sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/twrp-extras.xml ;
-  fi  
+ # if (( $(echo "$ANDROID_VERSION < 10.0" | bc -l) )); then
+ #   sed -i 's/android_system_core/android_system_core_old/' .repo/manifests/omni-aosp.xml ;
+ #   sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/omni-aosp.xml ;
+ #   sed -i 's/android_frameworks_base/android_frameworks_base_old/g' .repo/manifests/remove-minimal.xml ;
+ #   sed -i 's/android_frameworks_base/android_frameworks_base_old/' .repo/manifests/twrp-extras.xml ;
+ # fi  
 fi
 
 # Sync the repo
 echo "Syncing PBRP repo..."
 repo sync -j$(nproc --all) --force-sync
 
-
 # Save the temp tree in the manifest dir.
 pushd "$MANIFEST_DIR"
-
 
 # If DEVICE_TREE is not provided, default to the current repository
 if [ -z "$DEVICE_TREE" ]; then
